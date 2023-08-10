@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Date_ver2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,15 @@ namespace Date_ver2.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<User> users = new List<User>
+            {
+                new User { Id = 1, Name = "John Doe", Address = "123 Main St", Country = "USA" },
+                new User { Id = 2, Name = "Jane Smith", Address = "456 Elm St", Country = "Canada" }
+                // Add more user instances as needed
+               
+            };
+
+            return View(users);
         }
 
         public ActionResult About()
