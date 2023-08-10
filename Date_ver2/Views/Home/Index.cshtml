@@ -155,8 +155,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <script>
-    var modelData = @Html.Raw(Json.Encode(Model));
-    console.log(modelData);
 
     var jq = $.noConflict();
     jq(document).ready(function () {
@@ -223,13 +221,9 @@
         $('#dateStart').val(formattedNow);
         $('#dateEnd').val(formattedTomorrow);
 
-        // Trigger input event to make datetime picker recognize the values
-        $('#dateStart').trigger('input');
-        $('#dateEnd').trigger('input');
-
         // Initialize date picker interaction
-        $('#datetimepickerStart').on('change.datetimepicker', function (e) {
-            $('#datetimepickerEnd').datetimepicker('minDate', e.date);
+        jq('#datetimepickerStart').on('change.datetimepicker', function (e) {
+            jq('#datetimepickerEnd').datetimepicker('minDate', e.date);
         });
 
         // Save button click event
