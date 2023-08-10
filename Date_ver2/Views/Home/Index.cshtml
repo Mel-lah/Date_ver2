@@ -124,7 +124,7 @@
         </tbody>
     </table>
 
-    <br/><br />
+    <br /><br />
 
     <h5>Datatable with User Class/Model</h5>
     <table id="myTable_ver2" class="table table-condensed table-hover">
@@ -148,15 +148,18 @@
     </table>
 </main>
 
-<!-- Include Bootstrap and jQuery JavaScript libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Bootstrap Datepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.en-GB.min.js"></script> <!-- Include the locale file -->
+<!-- Include Bootstrap 4 DateTimePicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <script>
     var modelData = @Html.Raw(Json.Encode(Model));
     console.log(modelData);
 
-    $(document).ready(function () {
+    var jq = $.noConflict();
+    jq(document).ready(function () {
 
         //
         // Start For data table
@@ -206,12 +209,12 @@
         const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
 
         // Set default values for the input fields
-        $('#datetimepickerStart').datetimepicker({
+        jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
             minDate: now // Set minDate to current date
         });
 
-        $('#datetimepickerEnd').datetimepicker({
+        jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
             minDate: now // Set minDate to current date
         });
@@ -219,6 +222,10 @@
         // Set initial input field values
         $('#dateStart').val(formattedNow);
         $('#dateEnd').val(formattedTomorrow);
+
+        // Trigger input event to make datetime picker recognize the values
+        $('#dateStart').trigger('input');
+        $('#dateEnd').trigger('input');
 
         // Initialize date picker interaction
         $('#datetimepickerStart').on('change.datetimepicker', function (e) {
