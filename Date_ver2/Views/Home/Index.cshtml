@@ -26,7 +26,6 @@
         font-weight: bold;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
-
 </style>
 
 <main>
@@ -159,6 +158,10 @@
 
     $(document).ready(function () {
 
+        //
+        // Start For data table
+        //
+
         // Define datatable
         $('myTable').DataTable();
 
@@ -169,7 +172,6 @@
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
             ]
         });
-
 
 
         // Define datatable ver2
@@ -183,13 +185,16 @@
             ]
         });
 
+        //
+        // End for data table
+        //
 
 
 
 
-
-
-
+        //
+        //Start for Button Pop-up
+        //
 
 
         // Calculate current date and time using Moment.js
@@ -246,5 +251,9 @@
             // Clear the success popup display property
             $('#successPopup').css('display', '');
         });
+
+        //
+        //End for Button Pop-up
+        //
     });
 </script>
