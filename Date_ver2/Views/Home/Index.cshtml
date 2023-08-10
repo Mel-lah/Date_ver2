@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
+@model List<Date_ver2.Models.User>
+@using Date_ver2.Models
 
 
 
@@ -25,6 +26,7 @@
         font-weight: bold;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+
 </style>
 
 <main>
@@ -84,7 +86,9 @@
     <div id="successPopup" class="alert alert-success" style="display: none;">
         Dates saved successfully!
     </div>
-    <table id="myTable" class="table table-condensed">
+
+
+    <table id="myTable" class="table table-condensed table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -120,6 +124,29 @@
             </tr>
         </tbody>
     </table>
+
+    <br/><br />
+
+    <h5>Datatable with User Class/Model</h5>
+    <table id="myTable_ver2" class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Address</td>
+                <td>@user.Country</td>
+            </tr>
+        }
+    </table>
 </main>
 
 <!-- Include Bootstrap and jQuery JavaScript libraries -->
@@ -127,6 +154,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    var modelData = @Html.Raw(Json.Encode(Model));
+    console.log(modelData);
+
     $(document).ready(function () {
 
         // Define datatable
@@ -135,9 +165,32 @@
         // Initialize DataTable with sorting options
         $('#myTable').DataTable({
             "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
             ]
         });
+
+
+
+        // Define datatable ver2
+        $('myTable_ver2').DataTable();
+
+        // Initialize DataTable with sorting options
+        $('#myTable_ver2').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
+                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+            ]
+        });
+
+
+
+
+
+
+
+
+
 
         // Calculate current date and time using Moment.js
         const now = moment();
