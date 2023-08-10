@@ -1,6 +1,9 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
 }
+
+
 
 
 <style>
@@ -81,6 +84,42 @@
     <div id="successPopup" class="alert alert-success" style="display: none;">
         Dates saved successfully!
     </div>
+    <table id="myTable" class="table table-condensed">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Hans Gier</td>
+                <td>Tambulilid</td>
+                <td>Nigeria</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Hanssss Gier</td>
+                <td>Tambulilidssss</td>
+                <td>Nigeriassss</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Hansss Gier</td>
+                <td>Tambulilidsss</td>
+                <td>Nigeriasss</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Hanss Gier</td>
+                <td>Tambulilidss</td>
+                <td>Nigeriass</td>
+            </tr>
+        </tbody>
+    </table>
 </main>
 
 <!-- Include Bootstrap and jQuery JavaScript libraries -->
@@ -89,6 +128,17 @@
 
 <script>
     $(document).ready(function () {
+
+        // Define datatable
+        $('myTable').DataTable();
+
+        // Initialize DataTable with sorting options
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+            ]
+        });
+
         // Calculate current date and time using Moment.js
         const now = moment();
         const tomorrow = moment().add(1, 'day');
@@ -139,9 +189,9 @@
         });
 
         // Modal show event
-            $('#myModal').on('show.bs.modal', function () {
-                // Clear the success popup display property
-                $('#successPopup').css('display', '');
-            });
+        $('#myModal').on('show.bs.modal', function () {
+            // Clear the success popup display property
+            $('#successPopup').css('display', '');
+        });
     });
 </script>
