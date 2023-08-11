@@ -246,27 +246,29 @@
 
 
         // Calculate current date and time using Moment.js
-        const now = moment();
-        const tomorrow = moment().add(1, 'day');
+        const today = moment().format('MM/DD/YYYY hh:mm:ss A');
+        const tomorrow = moment().add(1, 'day').format('MM/DD/YYYY hh:mm:ss A');
+
+        console.log(today);
 
         // Format the dates for input values
-        const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
-        const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedToday = today;
+        const formattedTomorrow = tomorrow;
+
+        // Set initial input field values
+        $('#dateStart').val(formattedToday);
+        $('#dateEnd').val(formattedTomorrow);
 
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: now // Set minDate to current date
+            minDate: today // Set minDate to current date
         });
 
         jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: now // Set minDate to current date
+            minDate: today // Set minDate to current date
         });
-
-        // Set initial input field values
-        $('#dateStart').val(formattedNow);
-        $('#dateEnd').val(formattedTomorrow);
 
         // Initialize date picker interaction
         jq('#datetimepickerStart').on('change.datetimepicker', function (e) {
