@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "Home Page";
 }
@@ -26,6 +26,7 @@
         font-weight: bold;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+
     .error-alert {
         position: absolute;
         top: 10%;
@@ -63,10 +64,10 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row">
-                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerStart" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required pattern="\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{2}:\d{2} [APap][Mm]" title="Please enter a valid date and time in MM/DD/YYYY hh:mm:ss AM/PM format." />
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required />
                                         <div class="input-group-append" data-target="#datetimepickerStart" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -75,7 +76,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerEnd" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerEnd" id="dateEnd" required />
@@ -103,7 +104,7 @@
         Enter a start or end date!
     </div>
 
-    <h5>Hardcoded data on datatable</h5>
+
     <table id="myTable" class="table table-condensed table-hover">
         <thead>
             <tr>
@@ -113,38 +114,35 @@
                 <th>Country</th>
             </tr>
         </thead>
-
         <tbody>
             <tr>
                 <td>1</td>
-                <td>John McGonald</td>
+                <td>Hans Gier</td>
                 <td>Tambulilid</td>
-                <td>Austria</td>
+                <td>Nigeria</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Gary Sue</td>
+                <td>Hanssss Gier</td>
                 <td>Tambulilidssss</td>
-                <td>UK</td>
+                <td>Nigeriassss</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Jane Doe</td>
+                <td>Hansss Gier</td>
                 <td>Tambulilidsss</td>
-                <td>Canada</td>
+                <td>Nigeriasss</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td>Mary Sue</td>
+                <td>Hanss Gier</td>
                 <td>Tambulilidss</td>
-                <td>USA</td>
+                <td>Nigeriass</td>
             </tr>
         </tbody>
     </table>
 
-
     <br /><br />
-
 
     <h5>Datatable with User Class/Model</h5>
     <table id="myTable_ver2" class="table table-condensed table-hover">
@@ -160,31 +158,6 @@
         {
             <tr>
                 <td>@user.Id</td>
-                <td>@user.Name</td>
-                <td>@user.Address</td>
-                <td>@user.Country</td>
-            </tr>
-        }
-    </table>
-
-
-    <br /><br />
-
-
-    <h5 class="user-select-none">Datatable with User Class/Model (ID will not be affected if the other columns are sorted)</h5>
-    <table id="myTable_ver3" class="table table-condensed user-select-none">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td></td>
                 <td>@user.Name</td>
                 <td>@user.Address</td>
                 <td>@user.Country</td>
@@ -208,47 +181,28 @@
         // Start For data table
         //
 
-        // TABLE NO. 1
-        // Define datatable ver1
+        // Define datatable
         $('myTable').DataTable();
+
         // Initialize DataTable with sorting options
-        const table1 = $('#myTable').DataTable({
+        $('#myTable').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ],
-            "order": []
+            ]
         });
 
 
-        
-        // TABLE NO. 2
+        // Define datatable ver2
+        $('myTable_ver2').DataTable();
+
         // Initialize DataTable with sorting options
-        const table2 = $('#myTable_ver2').DataTable({
+        $('#myTable_ver2').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ],
-            "order": []
+            ]
         });
-        
-        
-        // TABLE NO. 3
-        // Initialize DataTable with sorting options
-        const table3 = $('#myTable_ver3').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ],
-            "order": []
-        });
-        
-        // Add a custom numbering to the ID column for table 3
-        table3.on('order.dt search.dt', function () {
-            table3.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
 
         //
         // End for data table
@@ -263,29 +217,27 @@
 
 
         // Calculate current date and time using Moment.js
-        const today = moment();
-        const tomorrow = moment();
-
-        console.log(today);
+        const now = moment();
+        const tomorrow = moment().add(1, 'day');
 
         // Format the dates for input values
-        const formattedToday = today;
-        const formattedTomorrow = tomorrow;
-
-        // Set initial input field values
-        $('#dateStart').val(formattedToday);
-        $('#dateEnd').val(formattedTomorrow);
+        const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
 
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
 
         jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
+
+        // Set initial input field values
+        $('#dateStart').val(formattedNow);
+        $('#dateEnd').val(formattedTomorrow);
 
         // Initialize date picker interaction
         jq('#datetimepickerStart').on('change.datetimepicker', function (e) {
