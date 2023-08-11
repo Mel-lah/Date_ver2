@@ -1,9 +1,112 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+@model List<Date_ver2.Models.User>
+@using Date_ver2.Models
 
-    <p>Use this area to provide additional information.</p>
+
+<main>
+
+    <h1>Other designs:</h1>
+
+    <hr />
+
+    <h5>When loaded, ID is order asc</h5>
+    <table id="myTable_ver1" class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Address</td>
+                <td>@user.Country</td>
+            </tr>
+        }
+    </table>
+
+
+    <br /><br />
+
+
+    <h5 class="user-select-none">Datatable with User Class/Model (ID will not be affected if the other columns are sorted)</h5>
+    <table id="myTable_ver3" class="table table-condensed user-select-none">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@user.Name</td>
+                <td>@user.Address</td>
+                <td>@user.Country</td>
+            </tr>
+        }
+    </table>
 </main>
+
+<!-- Include Bootstrap Datepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.en-GB.min.js"></script> <!-- Include the locale file -->
+<!-- Include Bootstrap 4 DateTimePicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script>
+
+    var jq = $.noConflict();
+    jq(document).ready(function () {
+
+        //
+        // Start For data table
+        //
+
+        // TABLE NO. 1
+        // Initialize DataTable with sorting options
+        // Initialize DataTable with sorting options
+        const table1 = $('#myTable_ver1').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
+                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+            ],
+            "order": [[0, "asc"]] // Sort ID column in ascending order initially
+        });
+
+
+
+
+        // TABLE NO. 3
+        // Initialize DataTable with sorting options
+        const table3 = $('#myTable_ver3').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
+                { "orderable": true, "targets": [1, 2, 3] }, // Allow sorting for other columns
+            ],
+            "order": [[1, "desc"]] // Sort Name column in descending order initially
+        });
+
+        // Add a custom numbering to the ID column for table 3
+        table3.on('order.dt search.dt', function () {
+            table3.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        //
+        // End for data table
+        //
+
+    });
+</script>
