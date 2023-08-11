@@ -100,56 +100,14 @@
             Dates saved successfully!
         </div>
     </div>
-    
+
     <div id="errorPopup" class="error-alert alert-danger" style="display: none;">
         Enter a start or end date!
     </div>
 
-    <h5>Hardcoded data on datatable</h5>
-    <table id="myTable" class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>John McGonald</td>
-                <td>Tambulilid</td>
-                <td>Austria</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gary Sue</td>
-                <td>Tambulilidssss</td>
-                <td>UK</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jane Doe</td>
-                <td>Tambulilidsss</td>
-                <td>Canada</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Mary Sue</td>
-                <td>Tambulilidss</td>
-                <td>USA</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <br /><br />
-
 
     <h5>Datatable with User Class/Model</h5>
-    <table id="myTable_ver2" class="table table-condensed table-hover">
+    <table id="myTable_ver1" class="table table-condensed table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -211,22 +169,8 @@
         //
 
         // TABLE NO. 1
-        // Define datatable ver1
-        $('myTable').DataTable();
         // Initialize DataTable with sorting options
-        const table1 = $('#myTable').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ],
-            "order": []
-        });
-
-
-
-        // TABLE NO. 2
-        // Initialize DataTable with sorting options
-        const table2 = $('#myTable_ver2').DataTable({
+        const table1 = $('#myTable_ver1').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
