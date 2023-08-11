@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "Home Page";
 }
@@ -64,10 +64,10 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row">
-                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerStart" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required pattern="\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{2}:\d{2} [APap][Mm]" title="Please enter a valid date and time in MM/DD/YYYY hh:mm:ss AM/PM format." />
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required />
                                         <div class="input-group-append" data-target="#datetimepickerStart" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerEnd" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerEnd" id="dateEnd" required />
@@ -96,59 +96,18 @@
                 </div>
             </div>
         </div>
+        <div id="successPopup" class="success-alert alert-success" style="display: none;">
+            Dates saved successfully!
+        </div>
     </div>
-    <div id="successPopup" class="success-alert alert-success" style="display: none;">
-        Dates saved successfully!
-    </div>
+
     <div id="errorPopup" class="error-alert alert-danger" style="display: none;">
         Enter a start or end date!
     </div>
 
-    <h5>Hardcoded data on datatable</h5>
-    <table id="myTable" class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>John McGonald</td>
-                <td>Tambulilid</td>
-                <td>Austria</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gary Sue</td>
-                <td>Tambulilidssss</td>
-                <td>UK</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jane Doe</td>
-                <td>Tambulilidsss</td>
-                <td>Canada</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Mary Sue</td>
-                <td>Tambulilidss</td>
-                <td>USA</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <br /><br />
-
 
     <h5>Datatable with User Class/Model</h5>
-    <table id="myTable_ver2" class="table table-condensed table-hover">
+    <table id="myTable_ver1" class="table table-condensed table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -200,7 +159,9 @@
 <!-- Include Bootstrap 4 DateTimePicker JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
 
-<script>var jq = $.noConflict();
+<script>
+
+    var jq = $.noConflict();
     jq(document).ready(function () {
 
         //
@@ -208,22 +169,8 @@
         //
 
         // TABLE NO. 1
-        // Define datatable ver1
-        $('myTable').DataTable();
         // Initialize DataTable with sorting options
-        const table1 = $('#myTable').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ],
-            "order": []
-        });
-
-
-
-        // TABLE NO. 2
-        // Initialize DataTable with sorting options
-        const table2 = $('#myTable_ver2').DataTable({
+        const table1 = $('#myTable_ver1').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
                 { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
@@ -262,29 +209,27 @@
 
 
         // Calculate current date and time using Moment.js
-        const today = moment();
-        const tomorrow = moment();
-
-        console.log(today);
+        const now = moment();
+        const tomorrow = moment().add(1, 'day');
 
         // Format the dates for input values
-        const formattedToday = today;
-        const formattedTomorrow = tomorrow;
-
-        // Set initial input field values
-        $('#dateStart').val(formattedToday);
-        $('#dateEnd').val(formattedTomorrow);
+        const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
 
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
 
         jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
+
+        // Set initial input field values
+        $('#dateStart').val(formattedNow);
+        $('#dateEnd').val(formattedTomorrow);
 
         // Initialize date picker interaction
         jq('#datetimepickerStart').on('change.datetimepicker', function (e) {
@@ -333,4 +278,5 @@
         //
         //End for Button Pop-up
         //
-    });</script>
+    });
+</script>

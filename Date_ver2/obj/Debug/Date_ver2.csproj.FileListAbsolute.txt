@@ -234,8 +234,6 @@ C:/Users/Umpad/source/repos/Date_ver2/Date_ver2/obj/Debug/Date_ver2.csproj.CopyC
 /Users/kuekuatsu/Documents/OJT/OJT Traning/JAE Hub/datepicker/Date_ver2/Date_ver2/obj/Debug/Date_ver2.csproj.CopyComplete
 /Users/kuekuatsu/Documents/OJT/OJT Traning/JAE Hub/datepicker/Date_ver2/Date_ver2/obj/Debug/Date_ver2.dll
 /Users/kuekuatsu/Documents/OJT/OJT Traning/JAE Hub/datepicker/Date_ver2/Date_ver2/obj/Debug/Date_ver2.pdb
-<<<<<<< Updated upstream
-=======
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/bin/Date_ver2.dll.config
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/bin/Date_ver2.dll
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/bin/Date_ver2.pdb
@@ -315,4 +313,3 @@ C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/obj/Debug/Dat
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/obj/Debug/Date_ver2.csproj.CopyComplete
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/obj/Debug/Date_ver2.dll
 C:/Users/alexa/OneDrive/Documents/GitHub/dasfg/Date_ver2/Date_ver2/obj/Debug/Date_ver2.pdb
->>>>>>> Stashed changes
