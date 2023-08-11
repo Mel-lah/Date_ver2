@@ -71,6 +71,7 @@ namespace Date_ver2.Controllers
             return countries[random.Next(countries.Length)];
         }
 
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
