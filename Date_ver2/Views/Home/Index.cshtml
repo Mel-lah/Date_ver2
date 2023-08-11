@@ -105,6 +105,7 @@
     </div>
 
 
+    <h5>Hardcoded data on datatable</h5>
     <table id="myTable" class="table table-condensed table-hover">
         <thead>
             <tr>
@@ -114,35 +115,38 @@
                 <th>Country</th>
             </tr>
         </thead>
+
         <tbody>
             <tr>
                 <td>1</td>
-                <td>Hans Gier</td>
+                <td>John McGonald</td>
                 <td>Tambulilid</td>
-                <td>Nigeria</td>
+                <td>Austria</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Hanssss Gier</td>
+                <td>Gary Sue</td>
                 <td>Tambulilidssss</td>
-                <td>Nigeriassss</td>
+                <td>UK</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Hansss Gier</td>
+                <td>Jane Doe</td>
                 <td>Tambulilidsss</td>
-                <td>Nigeriasss</td>
+                <td>Canada</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td>Hanss Gier</td>
+                <td>Mary Sue</td>
                 <td>Tambulilidss</td>
-                <td>Nigeriass</td>
+                <td>USA</td>
             </tr>
         </tbody>
     </table>
 
+
     <br /><br />
+
 
     <h5>Datatable with User Class/Model</h5>
     <table id="myTable_ver2" class="table table-condensed table-hover">
@@ -158,6 +162,31 @@
         {
             <tr>
                 <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Address</td>
+                <td>@user.Country</td>
+            </tr>
+        }
+    </table>
+
+
+    <br /><br />
+
+
+    <h5 class="user-select-none">Datatable with User Class/Model (ID will not be affected if the other columns are sorted)</h5>
+    <table id="myTable_ver3" class="table table-condensed user-select-none">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td></td>
                 <td>@user.Name</td>
                 <td>@user.Address</td>
                 <td>@user.Country</td>
