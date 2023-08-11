@@ -64,10 +64,10 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row">
-                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerStart" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required pattern="\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{2}:\d{2} [APap][Mm]" title="Please enter a valid date and time in MM/DD/YYYY hh:mm:ss AM/PM format." />
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required />
                                         <div class="input-group-append" data-target="#datetimepickerStart" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date<span class="text-danger required-field ml-1">*</span></label>
+                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerEnd" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerEnd" id="dateEnd" required />
@@ -209,29 +209,27 @@
 
 
         // Calculate current date and time using Moment.js
-        const today = moment();
-        const tomorrow = moment();
-
-        console.log(today);
+        const now = moment();
+        const tomorrow = moment().add(1, 'day');
 
         // Format the dates for input values
-        const formattedToday = today;
-        const formattedTomorrow = tomorrow;
-
-        // Set initial input field values
-        $('#dateStart').val(formattedToday);
-        $('#dateEnd').val(formattedTomorrow);
+        const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
 
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
 
         jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: today // Set minDate to current date
+            minDate: now // Set minDate to current date
         });
+
+        // Set initial input field values
+        $('#dateStart').val(formattedNow);
+        $('#dateEnd').val(formattedTomorrow);
 
         // Initialize date picker interaction
         jq('#datetimepickerStart').on('change.datetimepicker', function (e) {
@@ -280,4 +278,5 @@
         //
         //End for Button Pop-up
         //
-    });</script>
+    });
+</script>
