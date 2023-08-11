@@ -12,7 +12,7 @@
         transition: opacity 0.2s ease;
     }
 
-    .alert {
+    .success-alert {
         position: absolute;
         top: 10%;
         left: 50%;
@@ -23,6 +23,20 @@
         border-radius: 5px;
         background-color: #dff0d8;
         color: #3c763d;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .error-alert {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f2dede;
+        color: #a94442;
         font-weight: bold;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
@@ -82,8 +96,11 @@
             </div>
         </div>
     </div>
-    <div id="successPopup" class="alert alert-success" style="display: none;">
+    <div id="successPopup" class="success-alert alert-success" style="display: none;">
         Dates saved successfully!
+    </div>
+    <div id="errorPopup" class="error-alert alert-danger" style="display: none;">
+        Enter a start or end date!
     </div>
 
     <h5>Hardcoded data on datatable</h5>
@@ -277,14 +294,20 @@
 
         // Save button click event
         $('#saveButton').click(function () {
+            const startDate = $('#dateStart').val();
+            const endDate = $('#dateEnd').val();
 
-            const isFormValid = document.getElementById('dateStart').checkValidity() &&
-                document.getElementById('dateEnd').checkValidity();
+            if (startDate === '' || endDate === '') {
+                $('#errorPopup').fadeIn();
+                setTimeout(function () {
+                    $('#errorPopup').fadeOut(function () {
+                        // Clear the error popup display property
+                        $(this).css('display', '');
+                    });
+                }, 3000);
+            }
 
-            if (isFormValid) {
-                const startDate = $('#dateStart').val();
-                const endDate = $('#dateEnd').val();
-
+            else {
                 // Save the dates to local storage
                 localStorage.setItem('startDate', startDate);
                 localStorage.setItem('endDate', endDate);
@@ -299,11 +322,7 @@
                         $(this).css('display', '');
                     });
                 }, 3000);
-            } else {
-                //Please make an alert like below for this
-                console.log("error in date.")
             }
-
         });
 
         // Modal show event
