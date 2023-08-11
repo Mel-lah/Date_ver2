@@ -105,33 +105,33 @@
         Enter a start or end date!
     </div>
 
-
-    <h5>Datatable with User Class/Model</h5>
-    <table id="myTable_ver1" class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.Id</td>
-                <td>@user.Name</td>
-                <td>@user.Address</td>
-                <td>@user.Country</td>
-            </tr>
-        }
-    </table>
-
+    <!--
+       <h5>Datatable with User Class/Model</h5>
+       <table id="myTable_ver1" class="table table-condensed table-hover">
+           <thead>
+               <tr>
+                   <th>ID</th>
+                   <th>Name</th>
+                   <th>Address</th>
+                   <th>Country</th>
+               </tr>
+           </thead>
+           @foreach (var user in Model)
+           {
+               <tr>
+                   <td>@user.Id</td>
+                   <td>@user.Name</td>
+                   <td>@user.Address</td>
+                   <td>@user.Country</td>
+               </tr>
+           }
+       </table>
+    -->
 
     <br /><br />
 
 
-    <h5 class="user-select-none">Datatable with User Class/Model (ID will not be affected if the other columns are sorted)</h5>
+    <h5 class="user-select-none">ID in asc will not be affected if the other columns are sorted. Name is ordered desc </h5>
     <table id="myTable_ver3" class="table table-condensed user-select-none">
         <thead>
             <tr>
@@ -170,6 +170,7 @@
 
         // TABLE NO. 1
         // Initialize DataTable with sorting options
+        /*
         const table1 = $('#myTable_ver1').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
@@ -177,6 +178,7 @@
             ],
             "order": []
         });
+        */
 
 
         // TABLE NO. 3
@@ -184,9 +186,9 @@
         const table3 = $('#myTable_ver3').DataTable({
             "columnDefs": [
                 { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+                { "orderable": true, "targets": [1, 2, 3] }, // Allow sorting for other columns
             ],
-            "order": []
+            "order": [[1, "desc"]] // Sort Name column in descending order initially
         });
 
         // Add a custom numbering to the ID column for table 3
