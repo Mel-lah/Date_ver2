@@ -49,10 +49,10 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row">
-                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
+                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date<span class="text-danger required-field ml-1">*</span></label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerStart" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required />
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required pattern="\d{1,2}/\d{1,2}/\d{4} \d{1,2}:\d{2}:\d{2} [APap][Mm]" title="Please enter a valid date and time in MM/DD/YYYY hh:mm:ss AM/PM format." />
                                         <div class="input-group-append" data-target="#datetimepickerStart" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
+                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date<span class="text-danger required-field ml-1">*</span></label>
                                 <div class="col-sm-9">
                                     <div class="input-group date" id="datetimepickerEnd" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerEnd" id="dateEnd" required />
@@ -249,6 +249,8 @@
         const today = moment();
         const tomorrow = moment();
 
+        console.log(today);
+
         // Format the dates for input values
         const formattedToday = today;
         const formattedTomorrow = tomorrow;
@@ -275,23 +277,33 @@
 
         // Save button click event
         $('#saveButton').click(function () {
-            const startDate = $('#dateStart').val();
-            const endDate = $('#dateEnd').val();
 
-            // Save the dates to local storage
-            localStorage.setItem('startDate', startDate);
-            localStorage.setItem('endDate', endDate);
+            const isFormValid = document.getElementById('dateStart').checkValidity() &&
+                document.getElementById('dateEnd').checkValidity();
 
-            // Show the success popup
-            $('#successPopup').fadeIn();
+            if (isFormValid) {
+                const startDate = $('#dateStart').val();
+                const endDate = $('#dateEnd').val();
 
-            // Close the success popup after 3 seconds
-            setTimeout(function () {
-                $('#successPopup').fadeOut(function () {
-                    // Clear the success popup display property
-                    $(this).css('display', '');
-                });
-            }, 3000);
+                // Save the dates to local storage
+                localStorage.setItem('startDate', startDate);
+                localStorage.setItem('endDate', endDate);
+
+                // Show the success popup
+                $('#successPopup').fadeIn();
+
+                // Close the success popup after 3 seconds
+                setTimeout(function () {
+                    $('#successPopup').fadeOut(function () {
+                        // Clear the success popup display property
+                        $(this).css('display', '');
+                    });
+                }, 3000);
+            } else {
+                //Please make an alert like below for this
+                console.log("error in date.")
+            }
+
         });
 
         // Modal show event
