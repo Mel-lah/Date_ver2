@@ -16,11 +16,11 @@ namespace Date_ver2.Controllers
             return View(users);
         }
 
-        public ActionResult About()
+        public ActionResult OtherDesign()
         {
-            List<User> users = GenerateRandomUsers(100);
+            ViewBag.Message = "Other designs.";
 
-            return View(users);
+            return View();
         }
 
         private List<User> GenerateRandomUsers(int count)
