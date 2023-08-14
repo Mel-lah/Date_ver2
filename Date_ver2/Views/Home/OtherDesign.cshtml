@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "OtherDesign";
+}
+@model List<Date_ver2.Models.User>
+@using Date_ver2.Models
+
+<style>
+    .fade {
+        transition: opacity 0.2s ease;
+    }
+
+    .success-alert {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #dff0d8;
+        color: #3c763d;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .error-alert {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        display: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f2dede;
+        color: #a94442;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<main>
+
+    <h2>Other design: </h2>
+
+    <hr/> 
+
+    <div class="m-5">
+        <!-- Button to trigger the modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Set Start and End Date</button>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Dates</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date" id="datetimepickerStart" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerStart" id="dateStart" required />
+                                        <div class="input-group-append" data-target="#datetimepickerStart" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date" id="datetimepickerEnd" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepickerEnd" id="dateEnd" required />
+                                        <div class="input-group-append" data-target="#datetimepickerEnd" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                </div>
+            </div>
+        </div>
+        <div id="successPopup" class="success-alert alert-success" style="display: none;">
+            Dates saved successfully!
+        </div>
+    </div>
+
+</main>
+
+<!-- Include Bootstrap Datepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.en-GB.min.js"></script> <!-- Include the locale file -->
+<!-- Include Bootstrap 4 DateTimePicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script>
+
+</script>
