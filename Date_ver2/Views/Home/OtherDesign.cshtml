@@ -1,8 +1,11 @@
-﻿@{
-    ViewBag.Title = "OtherDesign";
+
+@{
+    ViewBag.Title = "Home Page";
 }
 @model List<Date_ver2.Models.User>
 @using Date_ver2.Models
+
+
 
 <style>
     .fade {
@@ -42,10 +45,6 @@
 
 <main>
 
-    <h2>Other design: </h2>
-
-    <hr/> 
-
     <div class="m-5">
         <!-- Button to trigger the modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Set Start and End Date</button>
@@ -63,7 +62,8 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <div class="modal-body">
-                        <form>
+                        <form id="myForm">
+                            <div id="errorPopup" class="text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
                             <div class="form-group row">
                                 <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div id="dateValidationError" class="text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
                             <div class="form-group row">
                                 <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
                                 <div class="col-sm-9">
@@ -97,11 +97,10 @@
                 </div>
             </div>
         </div>
-        <div id="successPopup" class="success-alert alert-success" style="display: none;">
-            Dates saved successfully!
-        </div>
     </div>
-
+    <div id="successPopup" class="success-alert alert-success" style="display: none;">
+        Dates saved successfully!
+    </div>
 </main>
 
 <!-- Include Bootstrap Datepicker JavaScript -->
@@ -112,4 +111,115 @@
 
 <script>
 
+    var jq = $.noConflict();
+    jq(document).ready(function () {
+
+        //
+        // Start For data table
+        //
+
+        // Define datatable
+        $('myTable').DataTable();
+
+        // Initialize DataTable with sorting options
+        $('#myTable').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
+                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+            ]
+        });
+
+
+        // Define datatable ver2
+        $('myTable_ver2').DataTable();
+
+        // Initialize DataTable with sorting options
+        $('#myTable_ver2').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
+                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
+            ]
+        });
+
+        //
+        // End for data table
+        //
+
+
+
+
+        //
+        //Start for Button Pop-up
+        //
+
+
+        // Calculate current date and time using Moment.js
+        const now = moment();
+        const tomorrow = moment();
+
+        // Format the dates for input values
+        const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedTomorrow = now.format('MM/DD/YYYY hh:mm:ss A');
+
+        // Set default values for the input fields
+        jq('#datetimepickerStart').datetimepicker({
+            format: 'MM/DD/YYYY hh:mm:ss A',
+            minDate: now // Set minDate to current date
+        });
+
+        jq('#datetimepickerEnd').datetimepicker({
+            format: 'MM/DD/YYYY hh:mm:ss A',
+            minDate: now // Set minDate to current date
+        });
+
+        // Set initial input field values
+        $('#dateStart').val(formattedNow);
+        $('#dateEnd').val(formattedTomorrow);
+
+        // Save button click event
+        $('#saveButton').click(function () {
+            const startDate = $('#dateStart').val();
+            const endDate = $('#dateEnd').val();
+
+            startDateTime = new Date(startDate);
+            endDateTime = new Date(endDate);
+
+            if (startDate === '' || endDate === '') {
+                $('#dateValidationError').fadeOut();
+                $('#errorPopup').text('Please select a Start or End Date').fadeIn();
+            }
+            else if (startDate > endDate) {
+                $('#errorPopup').fadeOut();
+                $('#dateValidationError').text('End Date must be greater than Start Date').fadeIn();
+            }
+            else {
+                $('#errorPopup').fadeOut();
+                $('#dateValidationError').fadeOut();
+                // Save the dates to local storage
+                localStorage.setItem('startDate', startDate);
+                localStorage.setItem('endDate', endDate);
+
+                // Show the success popup
+                $('#successPopup').fadeIn();
+
+                // Close the success popup after 3 seconds
+                setTimeout(function () {
+                    $('#successPopup').fadeOut(function () {
+                        // Clear the success popup display property
+                        $(this).css('display', '');
+                    });
+                }, 3000);
+            }
+        });
+
+        // Modal show event
+        $('#myModal').on('show.bs.modal', function () {
+            // Clear the success popup display property
+            $('#successPopup').css('display', '');
+        });
+
+        //
+        //End for Button Pop-up
+        //
+    });
 </script>
