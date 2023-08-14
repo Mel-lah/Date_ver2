@@ -85,7 +85,7 @@
                 <div class="modal-body .fixed-modal-content">
                     <div class="modal-body">
                         <form id="myForm">
-                            <div id="errorPopup" class="error-text text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
+                            <div id="errorPopup1" class="error-text text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
                             <div class="form-group row pt-1">
                                 <label for="dateStart" class="col-sm-3 col-form-label">Start Date</label>
                                 <div class="col-sm-9">
@@ -97,6 +97,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="errorPopup2" class="ndate text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
                             <div id="dateValidationError" class="ndate text-danger" style="display: none; margin-left: 120px; font-size: 12px;"></div>
                             <div class="form-group row pt-3">
                                 <label for="dateEnd" class="col-sm-3 col-form-label">End Date</label>
@@ -136,39 +137,6 @@
     var jq = $.noConflict();
     jq(document).ready(function () {
 
-        //
-        // Start For data table
-        //
-
-        // Define datatable
-        $('myTable').DataTable();
-
-        // Initialize DataTable with sorting options
-        $('#myTable').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ]
-        });
-
-
-        // Define datatable ver2
-        $('myTable_ver2').DataTable();
-
-        // Initialize DataTable with sorting options
-        $('#myTable_ver2').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 0 }, // First column (index 0) is not sortable
-                { "orderable": true, "targets": [1, 2, 3] } // Allow sorting for other columns
-            ]
-        });
-
-        //
-        // End for data table
-        //
-
-
-
 
         //
         //Start for Button Pop-up
@@ -177,11 +145,11 @@
 
         // Calculate current date and time using Moment.js
         const now = moment();
-        const tomorrow = moment();
+        const tomorrow = moment().add(1, 'day');
 
         // Format the dates for input values
         const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
-        const formattedTomorrow = now.format('MM/DD/YYYY hh:mm:ss A');
+        const formattedTomorrow = tomorrow.format('MM/DD/YYYY hh:mm:ss A');
 
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
@@ -206,16 +174,23 @@
             startDateTime = new Date(startDate);
             endDateTime = new Date(endDate);
 
-            if (startDate === '' || endDate === '') {
+            if (startDate === '' ) {
                 $('#dateValidationError').fadeOut();
-                $('#errorPopup').text('Please select a Start or End Date').fadeIn();
+                $('#errorPopup1').text('Please select a StartDate').fadeIn();
+            }
+            else if (endDate === '') {
+                $('#errorPopup1').fadeOut();
+                $('#dateValidationError').fadeOut();
+                $('#errorPopup2').text('Please select an End Date').fadeIn();
             }
             else if (startDate > endDate) {
-                $('#errorPopup').fadeOut();
-                $('#dateValidationError').text('End Date must be greater than Start Date').fadeIn();
+                $('#errorPopup1').fadeOut();
+                $('#errorPopup2').fadeOut();
+                $('#dateValidationError').text('End Date must be greater than Start Date and Time').fadeIn();
             }
             else {
-                $('#errorPopup').fadeOut();
+                $('#errorPopup1').fadeOut();
+                $('#errorPopup2').fadeOut();
                 $('#dateValidationError').fadeOut();
                 // Save the dates to local storage
                 localStorage.setItem('startDate', startDate);
