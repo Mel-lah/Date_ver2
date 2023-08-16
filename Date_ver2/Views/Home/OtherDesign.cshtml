@@ -167,6 +167,43 @@
         $('#dateStart').val(formattedNow);
         $('#dateEnd').val(formattedTomorrow);
 
+        const startDate = $('#dateStart').val();
+        const endDate = $('#dateEnd').val();
+
+        $('#dateStart').on('input', function () {
+            const startDate = $('#dateStart').val();
+            const endDate = $('#dateEnd').val();
+
+            if (startDate === '') {
+                $('#errorPopup1').text('Please select a Start Date').fadeIn();
+            } else {
+                $('#errorPopup1').fadeOut();
+                if (startDate > endDate) {
+                    $('#dateValidationError').text('End Date must be greater than Start Date and Time').fadeIn();
+                }
+                else {
+                    $('#dateValidationError').fadeOut();
+                }
+            }
+        });
+
+        $('#dateEnd').on('input', function () {
+            const startDate = $('#dateStart').val();
+            const endDate = $('#dateEnd').val();
+
+            if (endDate === '') {
+                $('#errorPopup2').text('Please select an End Date').fadeIn();
+            } else {
+                $('#errorPopup2').fadeOut();
+                if (endDate < startDate) {
+                    $('#dateValidationError').text('End Date must be greater than Start Date and Time').fadeIn();
+                }
+                else {
+                    $('#dateValidationError').fadeOut();
+                }
+            }
+        });
+
         // Save button click event
         $('#saveButton').click(function () {
             const startDate = $('#dateStart').val();
@@ -175,19 +212,14 @@
             startDateTime = new Date(startDate);
             endDateTime = new Date(endDate);
 
-            if (startDate === '' ) {
-                $('#dateValidationError').fadeOut();
-                $('#errorPopup1').text('Please select a StartDate').fadeIn();
+            if (startDate === '') {
+                return;
             }
             else if (endDate === '') {
-                $('#errorPopup1').fadeOut();
-                $('#dateValidationError').fadeOut();
-                $('#errorPopup2').text('Please select an End Date').fadeIn();
+                return;
             }
             else if (startDate > endDate) {
-                $('#errorPopup1').fadeOut();
-                $('#errorPopup2').fadeOut();
-                $('#dateValidationError').text('End Date must be greater than Start Date and Time').fadeIn();
+                return;
             }
             else {
                 $('#errorPopup1').fadeOut();
@@ -197,7 +229,7 @@
                 localStorage.setItem('startDate', startDate);
                 localStorage.setItem('endDate', endDate);
 
-                $('.close').click(); 
+                $('.close').click();
                 // Show the success popup
                 $('#successPopup').fadeIn();
 
@@ -210,6 +242,7 @@
                 }, 3000);
             }
         });
+
         // Modal show event
         $('#myModal').on('show.bs.modal', function () {
             // Clear the success popup display property
