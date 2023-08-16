@@ -146,6 +146,7 @@
         // Calculate current date and time using Moment.js
         const now = moment();
         const tomorrow = moment().add(1, 'day');
+        const limit = moment().startOf('day')
 
         // Format the dates for input values
         const formattedNow = now.format('MM/DD/YYYY hh:mm:ss A');
@@ -154,12 +155,12 @@
         // Set default values for the input fields
         jq('#datetimepickerStart').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: now // Set minDate to current date
+            minDate: limit // Set minDate to current date
         });
 
         jq('#datetimepickerEnd').datetimepicker({
             format: 'MM/DD/YYYY hh:mm:ss A',
-            minDate: now // Set minDate to current date
+            minDate: limit // Set minDate to current date
         });
 
         // Set initial input field values
