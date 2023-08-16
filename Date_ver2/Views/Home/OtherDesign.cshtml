@@ -162,14 +162,18 @@
             const startDate = $('#dateStart').val();
             const endDate = $('#dateEnd').val();
 
-            if (startDate === '') {
-                $('#dateValidationError').fadeOut();
+            if (startDate === '' && endDate === ''){
+                $('#dateValidationError').fadeOut();               
+                $('#errorPopup1').text('Please select a Start Date').fadeIn();
+                $('#errorPopup2').text('Please select an End Date').fadeIn();
+            } else if (startDate === '') {
                 $('#errorPopup2').fadeOut();
                 $('#errorPopup1').text('Please select a Start Date').fadeIn();
-            } else if (endDate === '') {
                 $('#dateValidationError').fadeOut();
+            } else if (endDate === '') {               
                 $('#errorPopup1').fadeOut();
-                $('#errorPopup2').fadeOut().text('Please select an End Date').fadeIn();
+                $('#errorPopup2').text('Please select an End Date').fadeIn();
+                $('#dateValidationError').fadeOut();
             } else if (startDate >= endDate) {
                 $('#errorPopup1').fadeOut();
                 $('#errorPopup2').fadeOut();
